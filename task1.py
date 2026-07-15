@@ -8,17 +8,18 @@ from datetime import datetime
 
 def get_days_from_today(date):
     days_from_today = datetime.today().date().toordinal() - date.toordinal()
-    print(days_from_today)
+    return days_from_today  # <-- Виправлено ф-цію, тепер повертає результат
 
 
 # Перевіряємо корекність дати 
 while True:
-    try:                          # Просимо ввести дату, зразу ж перетворюючи її в об'єкт datetime 
+    try:                                   # Просимо ввести дату, зразу ж перетворюючи її в об'єкт datetime 
         date = datetime.strptime(input("Введіть дату в форматі 'РРРР-ММ-ДД': "), "%Y-%m-%d").date()
 
-        get_days_from_today(date) # Використовуємо ф-цію 
+        result = get_days_from_today(date) # Використовуємо ф-цію та зберігаємо результат
+        print(result)                      # Виводимо значення
 
-        break                     # завершуємо цикл while
-    except ValueError:            # При неправильному вводі повідомляємо про помилку та повторюємо запит 
+        break                              # завершуємо цикл while
+    except ValueError:                     # При неправильному вводі повідомляємо про помилку та повторюємо запит 
         print("Дата некореткна")
 
