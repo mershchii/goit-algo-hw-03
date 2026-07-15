@@ -1,34 +1,30 @@
 import random
 
-numbers = set()
-
 #    Функція генерує вказану кількість унікальних чисел у заданому діапазоні.
 #    Функція повертає список випадково вибраних, відсортованих чисел. Числа в наборі не повинні повторюватися. Якщо параметри не відповідають заданим обмеженням, функція повертає пустий список.
 
-def correct_input():
-
-    while True:
-        try:    
-            min = int(input("Введіть мінімальне значення не менше 1: "))
-            max = int(input("Введіть максимальне значення не більше 1000: "))
-            quantity = int(input(f"Введіть кількість чисел не менше {min} та не більше {max}: "))
-
-            if min < 1 or max > 1000 or min > max: 
-                print("Некоректне мінімальне чи максимальне значення. Повторіть спробу!")
-            elif quantity < min or quantity > max: 
-                print("Некоректна кількість чисел. Повторіть спробу!")
-            else:
-                return min, max, quantity
-        except ValueError:
-            print("Введіть ціле число!!!")
+min = random.randint(2, 1000)                # Генеруємо випадкове число min
+max = random.randint(2, 1000)                # Генеруємо випадкове число max
+quantity = random.randint(1, 10)             # Генеруємо випадкове число quantity 
 
 def get_numbers_ticket(min, max, quantity):
 
-    while len(numbers) < quantity:
-        num = random.randint(min, max+1)
-        numbers.add(num)
-    print(sorted(numbers))
+    numbers = set()                          # Задаємо пусту множину 
 
 
+    if min < 1 or max > 1000 or min >= max:  # перевіряємо значення 
+        print("Некоректні дані")             # якщо дані невалідні, повертається пустий список
+        return numbers                       
+    else:                                    # Якщо валідні, повертається множина з відсортованими та унікольними числами 
+        while len(numbers) < quantity:   
+            num = random.randint(min, max+1)
+            numbers.add(num)
+        return sorted(numbers)
 
-get_numbers_ticket(*correct_input())
+# Перевіряємо роботу ф-ції 
+print("-"*16)
+print("min     : ", min)
+print("max     : ", max)
+print("quantity: ", quantity)
+print("-"*16)
+print(get_numbers_ticket(min, max, quantity))
